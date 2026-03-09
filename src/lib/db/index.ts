@@ -4,7 +4,7 @@ import path from "path";
 import fs from "fs";
 import * as schema from "./schema";
 
-const DB_PATH = process.env.DATABASE_PATH || "./data/shipping-tracker.db";
+const DB_PATH = process.env.DATABASE_PATH || "./data/lootbox.db";
 
 const dir = path.dirname(DB_PATH);
 if (!fs.existsSync(dir)) {

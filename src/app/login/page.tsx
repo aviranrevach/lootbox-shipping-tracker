@@ -46,7 +46,7 @@ export default function LoginPage() {
             <Package className="h-10 w-10 text-primary" />
           </div>
           <CardTitle className="font-poppins text-2xl">
-            Shipping Tracker
+            LootBox
           </CardTitle>
           <p className="text-sm text-muted-foreground">
             Enter the family password to continue

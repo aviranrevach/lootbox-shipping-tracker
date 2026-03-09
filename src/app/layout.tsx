@@ -21,8 +21,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Shipping Tracker",
-  description: "Track your shipments from Gmail",
+  title: "LootBox",
+  description: "Your shipments, unboxed — track every package from Gmail",
 };
 
 export default function RootLayout({

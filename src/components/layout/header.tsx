@@ -19,7 +19,7 @@ export function Header() {
       <header className="border-b bg-card">
         <div className="container mx-auto flex h-14 items-center justify-between px-4">
           <Link href="/" className="text-lg font-semibold font-poppins">
-            Shipping Tracker
+            LootBox
           </Link>
           <button
             onClick={() => setShowSettings(true)}

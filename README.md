@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LootBox
 
-## Getting Started
+**Your shipments, unboxed.** A self-hosted shipping dashboard that scans your Gmail, extracts tracking info, and gives you one clean view of everything headed your way.
 
-First, run the development server:
+No more digging through emails. No more "did I already order that?" Just open LootBox and see what's coming.
+
+---
+
+## What it does
+
+- **Gmail sync** — Connects via OAuth2 and automatically finds shipping/order confirmation emails
+- **Smart parsing** — Extracts carriers, tracking numbers, product names, and images from 10+ carrier formats (FedEx, UPS, USPS, DHL, Amazon, AliExpress, and more)
+- **Live dashboard** — See all your shipments at a glance with status, carrier, ETA, and product images
+- **Detail view** — Tap any shipment for the full timeline: order date, tracking events, original email
+- **Flag & review** — Flag suspicious or interesting shipments with multi-select reasons and notes
+- **Research export** — Export flagged items for further investigation
+- **Password protected** — Simple family-friendly password gate keeps it private
+- **Dark mode** — Because obviously
+
+## Stack
+
+| Layer | Tech |
+|-------|------|
+| Framework | Next.js 16 + React 19 |
+| Styling | Tailwind v4 + shadcn/ui |
+| Database | SQLite (libsql + Drizzle ORM) |
+| Email | Gmail API (OAuth2) |
+| Fonts | Geist Sans, Geist Mono, Poppins |
+| Hosting | Railway (persistent volume) |
+
+## Quick start
 
 ```bash
+# Clone it
+git clone https://github.com/aviranrevach/shipping-tracker.git
+cd shipping-tracker
+
+# Install
+npm install
+
+# Set up env vars (see .env.production.example)
+cp .env.production.example .env.local
+# Fill in your Google OAuth2 credentials + SITE_PASSWORD
+
+# Run
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [localhost:3000](http://localhost:3000) and connect your Gmail account from settings.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Description |
+|----------|-------------|
+| `GOOGLE_CLIENT_ID` | OAuth2 client ID from Google Cloud Console |
+| `GOOGLE_CLIENT_SECRET` | OAuth2 client secret |
+| `GOOGLE_REDIRECT_URI` | OAuth callback URL (`http://localhost:3000/api/auth/callback` for dev) |
+| `DATABASE_PATH` | SQLite file path (default: `./data/lootbox.db`) |
+| `SITE_PASSWORD` | Password to access the app |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/              # Next.js app router pages + API routes
+  components/       # UI components (dashboard, shipment detail, settings)
+  lib/
+    db/             # Drizzle schema + database client
+    gmail/          # Gmail API integration + OAuth
+    parsers/        # Email parser chain (10+ carrier formats)
+    sync/           # Sync engine — orchestrates Gmail fetch + parse + store
+data/               # SQLite database + cached images (gitignored)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+LootBox runs great on **Railway** with a persistent volume mounted at `/app/data` for the SQLite database and cached product images. Set your env vars in the Railway dashboard and you're live.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built by [@aviranrevach](https://github.com/aviranrevach)

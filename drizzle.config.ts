@@ -5,6 +5,6 @@ export default defineConfig({
   out: "./drizzle",
   dialect: "turso",
   dbCredentials: {
-    url: `file:${process.env.DATABASE_PATH || "./data/shipping-tracker.db"}`,
+    url: `file:${process.env.DATABASE_PATH || "./data/lootbox.db"}`,
   },
 });
