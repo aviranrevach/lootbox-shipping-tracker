@@ -38,8 +38,8 @@ No more digging through emails. No more "did I already order that?" Just open Lo
 
 ```bash
 # Clone it
-git clone https://github.com/aviranrevach/shipping-tracker.git
-cd shipping-tracker
+git clone https://github.com/aviranrevach/lootbox-shipping-tracker.git
+cd lootbox-shipping-tracker
 
 # Install
 npm install
