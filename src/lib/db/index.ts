@@ -11,6 +11,12 @@ if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
+// One-time migration: rename old DB file to new name
+const oldDbPath = path.join(dir, "shipping-tracker.db");
+if (!fs.existsSync(DB_PATH) && fs.existsSync(oldDbPath)) {
+  fs.renameSync(oldDbPath, DB_PATH);
+}
+
 const client = createClient({
   url: `file:${DB_PATH}`,
 });
